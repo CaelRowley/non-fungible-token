@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "hardhat test",
-    "deploy:sepolia": "hardhat run scripts/deploy.ts --network sepolia"
+    "deploy:sepolia": "hardhat run scripts/deploy.ts --network sepolia",
+    "remix": "remixd -s ./contracts --remix-ide https://remix.ethereum.org"
+
   },
   "keywords": [],
   "author": "",
@@ -15,6 +17,7 @@
     "@nomicfoundation/hardhat-toolbox-viem": "^2.0.0",
     "@nomicfoundation/hardhat-verify": "^2.0.0",
     "@nomicfoundation/hardhat-viem": "^1.0.0",
+    "@remix-project/remixd": "^0.6.27",
     "@types/chai": "^4.2.0",
     "@types/chai-as-promised": "^7.1.6",
     "@types/mocha": ">=9.1.0",
