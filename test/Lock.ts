@@ -13,19 +13,23 @@ describe("Lock", function () {
   async function deployOneYearLockFixture() {
     const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
 
+    const name = "Test Contract"
+    const symbol = "TC"
     const lockedAmount = parseGwei("1");
     const unlockTime = BigInt((await time.latest()) + ONE_YEAR_IN_SECS);
 
     // Contracts are deployed using the first signer/account by default
     const [owner, otherAccount] = await hre.viem.getWalletClients();
 
-    const lock = await hre.viem.deployContract("Lock", [unlockTime], {
+    const lock = await hre.viem.deployContract("Lock", [name, symbol, unlockTime], {
       value: lockedAmount,
     });
 
     const publicClient = await hre.viem.getPublicClient();
 
     return {
+      name,
+      symbol,
       lock,
       unlockTime,
       lockedAmount,
@@ -36,6 +40,18 @@ describe("Lock", function () {
   }
 
   describe("Deployment", function () {
+    it("Should set the right name", async function () {
+      const { name, lock } = await loadFixture(deployOneYearLockFixture);
+
+      expect(await lock.read.name()).to.equal(name);
+    });
+
+    it("Should set the right symbol", async function () {
+      const { symbol, lock } = await loadFixture(deployOneYearLockFixture);
+
+      expect(await lock.read.symbol()).to.equal(symbol);
+    });
+
     it("Should set the right unlockTime", async function () {
       const { lock, unlockTime } = await loadFixture(deployOneYearLockFixture);
 
@@ -64,7 +80,7 @@ describe("Lock", function () {
       // We don't use the fixture here because we want a different deployment
       const latestTime = BigInt(await time.latest());
       await expect(
-        hre.viem.deployContract("Lock", [latestTime], {
+        hre.viem.deployContract("Lock", ["Test Contract", "TC", latestTime], {
           value: 1n,
         })
       ).to.be.rejectedWith("Unlock time should be in the future");
