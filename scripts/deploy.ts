@@ -2,12 +2,14 @@ import { formatEther, parseEther } from "viem";
 import hre from "hardhat";
 
 async function main() {
+  const name = "Test Contract"
+  const symbol = "TC"
   const currentTimestampInSeconds = Math.round(Date.now() / 1000);
   const unlockTime = BigInt(currentTimestampInSeconds + 60);
 
   const lockedAmount = parseEther("0.001");
 
-  const lock = await hre.viem.deployContract("Lock", [unlockTime], {
+  const lock = await hre.viem.deployContract("Lock", [name, symbol, unlockTime], {
     value: lockedAmount,
   });
 
