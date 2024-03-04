@@ -1,7 +1,23 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import { HardhatUserConfig } from "hardhat/config";
+import { HardhatUserConfig, task } from "hardhat/config";
+import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import "@nomicfoundation/hardhat-toolbox-viem";
+
+type WalletClientsTaskArgs = {
+  message: string;
+};
+
+task("wallet-clients", "Prints the list of accounts")
+  .addParam("message", "A message to log")
+  .setAction(async (taskArgs: WalletClientsTaskArgs, hre: HardhatRuntimeEnvironment) => {
+
+    const accounts = await hre.viem.getWalletClients();
+    for (const account of accounts) {
+      console.log(account.account.address);
+    }
+    console.log(taskArgs.message)
+  });
 
 const config: HardhatUserConfig = {
   solidity: "0.8.24",
