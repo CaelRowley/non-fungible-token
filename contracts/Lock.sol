@@ -6,15 +6,15 @@ contract Lock {
     string public name;
     string public symbol;
 
-    uint public unlockTime;
+    uint256 public unlockTime;
     address payable public owner;
 
-    event Withdrawal(uint amount, uint when);
+    event Withdrawal(uint256 amount, uint256 when);
 
     constructor(
         string memory _name,
         string memory _symbol,
-        uint _unlockTime
+        uint256 _unlockTime
     ) payable {
         require(
             block.timestamp < _unlockTime,

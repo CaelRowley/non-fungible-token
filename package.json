@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "biome check --apply ./",
+    "lint": "pnpm lint:ts && pnpm lint:sol",
+    "lint:ts": "biome check --apply ./",
+    "lint:sol": "solhint --fix --noPrompt contracts/**/*.sol",
     "test": "hardhat test",
     "health": "pnpm lint && pnpm test",
     "deploy:sepolia": "hardhat run scripts/deploy.ts --network sepolia",
@@ -27,6 +29,7 @@
     "chai": "^4.4.1",
     "hardhat": "^2.21.0",
     "hardhat-gas-reporter": "^1.0.10",
+    "solhint": "^4.1.1",
     "solidity-coverage": "^0.8.10",
     "ts-node": "^10.9.2",
     "typescript": "~5.0.4",
