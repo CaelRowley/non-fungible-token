@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "biome check --apply ./",
     "test": "hardhat test",
+    "health": "pnpm lint && pnpm test",
     "deploy:sepolia": "hardhat run scripts/deploy.ts --network sepolia",
     "remix": "remixd -s ./contracts --remix-ide https://remix.ethereum.org"
   },
@@ -12,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@biomejs/biome": "1.5.3",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.10",
     "@nomicfoundation/hardhat-toolbox-viem": "^2.0.0",
     "@nomicfoundation/hardhat-verify": "^2.0.4",
