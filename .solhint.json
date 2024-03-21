@@ -2,6 +2,7 @@
 	"extends": "solhint:recommended",
 	"plugins": [],
 	"rules": {
+		"no-global-import": "off",
 		"func-visibility": ["warn", { "ignoreConstructors": true }]
 	}
 }

@@ -20,6 +20,9 @@ devDependencies:
   '@nomicfoundation/hardhat-viem':
     specifier: ^1.0.4
     version: 1.0.4(hardhat@2.21.0)(typescript@5.0.4)(viem@1.21.4)
+  '@openzeppelin/contracts':
+    specifier: ^5.0.2
+    version: 5.0.2
   '@remix-project/remixd':
     specifier: ^0.6.27
     version: 0.6.27
@@ -917,6 +920,10 @@ packages:
       '@nomicfoundation/solidity-analyzer-win32-arm64-msvc': 0.1.1
       '@nomicfoundation/solidity-analyzer-win32-ia32-msvc': 0.1.1
       '@nomicfoundation/solidity-analyzer-win32-x64-msvc': 0.1.1
+    dev: true
+
+  /@openzeppelin/contracts@5.0.2:
+    resolution: {integrity: sha512-ytPc6eLGcHHnapAZ9S+5qsdomhjo6QBHTDRRBFfTxXIpsicMhVPouPgmUPebZZZGX7vt9USA+Z+0M0dSVtSUEA==}
     dev: true
 
   /@pnpm/config.env-replace@1.1.0:
