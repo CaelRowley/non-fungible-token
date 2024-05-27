@@ -5,6 +5,7 @@ node_modules
 /cache
 /artifacts
 /contracts/artifacts
+/contracts/deployments
 .deps
 
 # TypeChain files

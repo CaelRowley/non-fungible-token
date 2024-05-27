@@ -1,27 +1,25 @@
+import fs from "fs";
 import hre from "hardhat";
-import { formatEther, parseEther } from "viem";
 
 async function main() {
-	const name = "Test Contract";
-	const symbol = "TC";
-	const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-	const unlockTime = BigInt(currentTimestampInSeconds + 60);
+	const [owner] = await hre.viem.getWalletClients();
 
-	const lockedAmount = parseEther("0.001");
-
-	const lock = await hre.viem.deployContract(
-		"Lock",
-		[name, symbol, unlockTime],
-		{
-			value: lockedAmount,
-		},
-	);
+	const contract = await hre.viem.deployContract("GhostiesNFT", [
+		owner.account.address,
+	]);
 
 	console.log(
-		`Lock with ${formatEther(
-			lockedAmount,
-		)}ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`,
+		`Ghosties contract with owner: ${owner.account.address} deployed to: ${contract.address}`,
 	);
+
+	const deploymentInfo = {
+		address: contract.address,
+		abi: contract.abi,
+	};
+
+  const filePath = "contracts/deployments"
+  fs.mkdirSync(filePath, { recursive: true });
+  fs.writeFileSync(filePath + "/deployed.json", JSON.stringify(deploymentInfo, null, 2));
 }
 
 // We recommend this pattern to be able to use async/await everywhere
