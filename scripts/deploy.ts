@@ -17,9 +17,12 @@ async function main() {
 		abi: contract.abi,
 	};
 
-  const filePath = "contracts/deployments"
-  fs.mkdirSync(filePath, { recursive: true });
-  fs.writeFileSync(filePath + "/deployed.json", JSON.stringify(deploymentInfo, null, 2));
+	const filePath = "contracts/deployments";
+	fs.mkdirSync(filePath, { recursive: true });
+	fs.writeFileSync(
+		`${filePath}/deployed.json`,
+		JSON.stringify(deploymentInfo, null, 2),
+	);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
